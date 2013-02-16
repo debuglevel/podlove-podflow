@@ -1,3 +1,6 @@
 [submodule "lib/ezcWorkflow.git"]
 	path = lib/ezcWorkflow.git
 	url = https://github.com/zetacomponents/Workflow.git
+[submodule "lib/guzzle.git"]
+	path = lib/guzzle.git
+	url = https://github.com/guzzle/guzzle.git
