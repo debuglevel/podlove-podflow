@@ -4,3 +4,18 @@
 [submodule "lib/guzzle.git"]
 	path = lib/guzzle.git
 	url = https://github.com/guzzle/guzzle.git
+[submodule "lib/zetacomponents/Base"]
+	path = lib/zetacomponents/Base
+	url = https://github.com/zetacomponents/Base.git
+[submodule "lib/zetacomponents/Workflow"]
+	path = lib/zetacomponents/Workflow
+	url = https://github.com/zetacomponents/Workflow.git
+[submodule "lib/zetacomponents/WorkflowDatabaseTiein"]
+	path = lib/zetacomponents/WorkflowDatabaseTiein
+	url = https://github.com/debuglevel/zetacomponents-WorkflowDatabaseTiein.git
+[submodule "lib/zetacomponents/DataBase"]
+	path = lib/zetacomponents/DataBase
+	url = https://github.com/zetacomponents/Database.git
+[submodule "lib/zetacomponents/DatabaseSchema"]
+	path = lib/zetacomponents/DatabaseSchema
+	url = https://github.com/zetacomponents/DatabaseSchema.git
