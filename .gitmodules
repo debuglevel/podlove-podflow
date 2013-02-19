@@ -13,9 +13,9 @@
 [submodule "lib/zetacomponents/WorkflowDatabaseTiein"]
 	path = lib/zetacomponents/WorkflowDatabaseTiein
 	url = https://github.com/debuglevel/zetacomponents-WorkflowDatabaseTiein.git
-[submodule "lib/zetacomponents/DataBase"]
-	path = lib/zetacomponents/DataBase
-	url = https://github.com/zetacomponents/Database.git
 [submodule "lib/zetacomponents/DatabaseSchema"]
 	path = lib/zetacomponents/DatabaseSchema
 	url = https://github.com/zetacomponents/DatabaseSchema.git
+[submodule "lib/zetacomponents/Database"]
+	path = lib/zetacomponents/Database
+	url = https://github.com/zetacomponents/Database.git

@@ -7,6 +7,9 @@ class Episode_Upload_Form_Service_Object implements \ezcWorkflowServiceObject {
 
 	public function execute(\ezcWorkflowExecution $execution) {
 		$execution_id = $execution->getVariable('execution_id');
+		
+		echo '<p>Debug: This is workflow instance '.$execution_id.'</p>';
+		
 		include dirname(__FILE__).'/../forms/episode_upload.php';
 
 		// Return true to signal that the service object has finished executing.
