@@ -1,27 +1,33 @@
 <?php
+
 namespace Podlove\Modules\Podflow\Actions;
 
-class Echo_Service_Object implements \ezcWorkflowServiceObject {
-	private $message;
+class Echo_Service_Object implements \ezcWorkflowServiceObject
+{
 
-	public function __construct($message) {
-		$this -> message = $message;
-	}
+    private $message;
 
-	public function execute(\ezcWorkflowExecution $execution) {
-		echo $this -> message;
+    public function __construct($message)
+    {
+        $this->message = $message;
+    }
 
-		// Manipulate the workflow.
-		// Does not affect the workflow, for illustration only.
-		$execution -> setVariable('choice', true);
+    public function execute(\ezcWorkflowExecution $execution)
+    {
+        echo $this->message;
 
-		// Return true to signal that the service object has finished
-		// executing.
-		return true;
-	}
+        // Manipulate the workflow.
+        // Does not affect the workflow, for illustration only.
+        $execution->setVariable('choice', true);
 
-	public function __toString() {
-		return "Echo_Service_Object, message {$this->message}";
-	}
+        // Return true to signal that the service object has finished
+        // executing.
+        return true;
+    }
+
+    public function __toString()
+    {
+        return "Echo_Service_Object, message {$this->message}";
+    }
 
 }
