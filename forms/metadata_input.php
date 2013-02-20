@@ -3,6 +3,8 @@
 </p>
 
 <form action="edit.php?post_type=podcast&page=podlove_podflow_settings_handle" method="POST">
+	<input name="execution_id" type="hidden" value="<?php echo $execution_id; ?>" />
+
 	<p>
 		Now, please tell me what's the title of this episode:
 		<textarea rows="1" class="large-text" name="title"></textarea>
@@ -20,7 +22,7 @@
 
 	<p>
 		That's it!
-		<input type="submit" value="And now, publish this episode!" />
+		<input type="submit" name="metadata" value="And now, publish this episode!" />
 	</p>
 
 </form>
