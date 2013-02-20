@@ -11,10 +11,14 @@ class Auphonic_Production_Service_Object implements \ezcWorkflowServiceObject {
 		$execution_id = $execution -> getVariable('execution_id');
 		$episode_temp_path = $execution -> getVariable('episode_temp_path');
 
+		$username = get_option('podflow_auphonic_username', null);
+		$password = get_option('podflow_auphonic_password', null);
+		$preset = get_option('podflow_auphonic_preset', null);
+
 		$client = new \Guzzle\Http\Client('https://auphonic.com/api/simple', array('ssl.certificate_authority' => false));
 		//XXX: ignoring ssl certs is a rather bad idea
 
-		$request = $client -> post('productions.json', null, array('preset' => 'presetuuid', 'title' => 'megatitle', 'action' => 'start', 'input_file' => '@' . $episode_temp_path)) -> setAuth('username', 'password');
+		$request = $client -> post('productions.json', null, array('preset' => $preset, 'title' => 'megatitle', 'action' => 'start', 'input_file' => '@' . $episode_temp_path)) -> setAuth($username, $password);
 
 		$response = $request -> send();
 

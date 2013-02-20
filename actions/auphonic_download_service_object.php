@@ -11,10 +11,13 @@ class Auphonic_Download_Service_Object implements \ezcWorkflowServiceObject {
 		$execution_id = $execution -> getVariable('execution_id');
 		$uuid = $execution -> getVariable('episode_auphonic_uuid');
 
+		$username = get_option('podflow_auphonic_username', null);
+		$password = get_option('podflow_auphonic_password', null);
+
 		$client = new \Guzzle\Http\Client('https://auphonic.com/api', array('ssl.certificate_authority' => false));
 		//XXX: ignoring ssl certs is a rather bad idea
 
-		$request = $client -> get('production/' . $uuid . '.json') -> setAuth('username', 'password');
+		$request = $client -> get('production/' . $uuid . '.json') -> setAuth($username, $password);
 
 		$response = $request -> send();
 
@@ -37,13 +40,28 @@ class Auphonic_Download_Service_Object implements \ezcWorkflowServiceObject {
 		 
 		    $fp = fopen($path, 'w');
 		 
-		    $ch = curl_init($download_url);
-		    curl_setopt($ch, CURLOPT_FILE, $fp);
-			curl_setopt($ch, CURLOPT_USERPWD, 'username'.':'.'password'); 
+		    $curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, $download_url);
+		    curl_setopt($curl, CURLOPT_FILE, $fp);
+			curl_setopt($curl, CURLOPT_USERPWD, $username.':'.$password); 
+		    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
+			curl_setopt($curl, CURLOPT_VERBOSE, TRUE);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+		 	// $curl_log = fopen("php://memory", 'rw');
+			// curl_setopt($curl, CURLOPT_STDERR, $curl_log);
+
+		    $data = curl_exec($curl);
+			
+			// $info = curl_getinfo($curl);
+			// $content=fread($curl_log,9999);
+			// var_dump($data);
+			// var_dump($content);
+			// var_dump($info);
+			// var_dump(curl_error($curl));
 		 
-		    $data = curl_exec($ch);
-		 
-		    curl_close($ch);
+		    curl_close($curl);
 		    fclose($fp);
 		}
 

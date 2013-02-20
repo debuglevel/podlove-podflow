@@ -33,6 +33,11 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject {
 		
 		$episode->save();
 		
+		
+		$mediafile = \Podlove\Model\MediaFile::find_or_create_by_episode_id_and_episode_asset_id($episode->id, 1);	// TODO: iterate through all available asset types ;)
+		$mediafile -> determine_file_size();
+		$mediafile -> save();
+		
 		wp_publish_post($post_id);
 		
 		return true;
