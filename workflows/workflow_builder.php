@@ -8,6 +8,7 @@ class Workflow_Builder
     public $name = "";
     protected $workflow;
     protected $process_steps = array();
+    protected $conditions = array();
 
     public function build_workflow()
     {

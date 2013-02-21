@@ -60,6 +60,36 @@ class Auphonic
 
         return $response->json();
     }
+    
+    public function get_presets()
+    {
+        $client = Auphonic::get_rest_api_client();
+        
+        $request = $client->get('presets.json')
+                ->setAuth(Auphonic::get_username(), Auphonic::get_password());
+
+        $response = $request->send();
+        $array = $request->send()->json();
+             
+        $presets = $array['data'];
+        return $presets;
+    }
+    
+    public function get_presets_simple()
+    {
+        $raw_presets = Auphonic::get_presets();
+        
+        $presets = array();
+        foreach ($raw_presets as $raw_preset)
+        {        
+            $sub = array();
+            $sub['uuid'] = $raw_preset['uuid'];
+            $sub['name'] = $raw_preset['preset_name'];
+            $presets[] = $sub;
+        }
+              
+        return $presets;
+    }
 
     public function get_duration($productioninfo)
     {

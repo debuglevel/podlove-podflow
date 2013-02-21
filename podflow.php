@@ -59,7 +59,7 @@ class Podflow extends \Podlove\Modules\Base
 
     private function start_workflow()
     {
-        $execution = Workflow::create_workflow_execution('Auphonic');
+        $execution = Workflow::create_workflow_execution(Workflows\Auphonic_Workflow_Builder::name);
 
         $execution_id = $execution->start();
         // workaround to let the workflow know its own execution id
