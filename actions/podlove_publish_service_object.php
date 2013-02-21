@@ -2,6 +2,8 @@
 
 namespace Podlove\Modules\Podflow\Actions;
 
+use Podlove\Modules\Podflow\Lib\Logger;
+
 include dirname(__FILE__) . '/../lib/guzzle.phar';
 
 class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
@@ -35,16 +37,32 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
         $episode->slug = $slug;
 
         $episode->save();
-        
+
         return $episode;
     }
 
     private function add_mediafile($episode)
     {
-        $mediafile = \Podlove\Model\MediaFile::find_or_create_by_episode_id_and_episode_asset_id($episode->id,
-                        1); // TODO: iterate through all available asset types ;)
-        $mediafile->determine_file_size();
-        $mediafile->save();
+        $episode_assets = \Podlove\Model\EpisodeAsset::all();
+
+        foreach ($episode_assets as $episode_asset)
+        {
+            Logger::log('Checking if there is a '.$episode_asset->title.' file.');
+            $mediafile = \Podlove\Model\MediaFile::find_or_create_by_episode_id_and_episode_asset_id($episode->id,
+                            $episode_asset->id);
+            $mediafile->determine_file_size();
+
+            if ($mediafile->size > 0)
+            {
+                Logger::log('Determined a file size (bigger than 0) of <strong>'.$mediafile->size.'</strong> for Episode Asset <strong>'.$mediafile->episode_asset_id.'</strong> and therefore saving it.');
+                $mediafile->save();
+            }
+            else
+            {
+                Logger::log('Determined a file size of <strong>'.$mediafile->size.'</strong> for Episode Asset <strong>'.$mediafile->episode_asset_id.'</strong> and therefore deleting it.');
+                $mediafile->delete();
+            }
+        }
     }
 
     public function execute(\ezcWorkflowExecution $execution)
@@ -61,7 +79,7 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
         $mediafile = $this->add_mediafile($episode);
 
         wp_publish_post($post->ID);
-        
+
         return true;
     }
 
