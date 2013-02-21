@@ -1,28 +1,31 @@
 <p>
-    Thank you! Your file was uploaded.
+    Thank you for the episode you uploaded!
 </p>
 
-<form action="edit.php?post_type=podcast&page=podlove_podflow_settings_handle" method="POST">
-    <input name="execution_id" type="hidden" value="<?php echo $execution_id; ?>" />
+<form action="edit.php?post_type=podcast&page=<?php echo \Podlove\Modules\Podflow\Podflow::menu_slug; ?>" method="POST">
+    <input name="execution_id" type="hidden" value="<?php echo $form_vars['execution_id']; ?>" />
 
     <p>
-        Now, please tell me what's the title of this episode:
+        Now, please tell me what's the <strong>title</strong> of this episode:
         <textarea rows="1" class="large-text" name="title"></textarea>
     </p>
 
     <p>
-        If you want to, you can also add a short subtitle:
+        If you want to, you can also add a short <strong>subtitle</strong>:
         <textarea rows="1" class="large-text" name="subtitle"></textarea>
     </p>
 
     <p>
-        And if you want to describe what this episode is about, I've got some space for you:
-        <textarea rows="1" class="large-text" name="summary"></textarea>
+        And if you want to write a <strong>summary</strong> what this episode is about, I've got some space for you:
+        <textarea rows="5" class="large-text" name="summary"></textarea>
     </p>
 
     <p>
         That's it!
-        <input type="submit" name="metadata" value="And now, publish this episode!" />
+    </p>
+
+    <p>
+        <input type="submit" name="metadata" value="And now, publish this episode!" class="button-primary" />
     </p>
 
 </form>

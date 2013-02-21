@@ -35,6 +35,7 @@ class Workflow_Builder
     {
         $visitor = new ezcWorkflowVisitorVisualization();
         $this->workflow->accept($visitor);
+        
         return (string) $visitor;
     }
 

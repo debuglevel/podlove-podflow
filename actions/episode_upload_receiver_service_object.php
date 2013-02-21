@@ -2,6 +2,9 @@
 
 namespace Podlove\Modules\Podflow\Actions;
 
+use \Podlove\Modules\Podflow\Lib\Storage;
+use \Podlove\Modules\Podflow\Lib\Logger;
+
 class Episode_Upload_Receiver_Service_Object implements \ezcWorkflowServiceObject
 {
 
@@ -12,24 +15,26 @@ class Episode_Upload_Receiver_Service_Object implements \ezcWorkflowServiceObjec
 
     public function execute(\ezcWorkflowExecution $execution)
     {
-        $execution_id = $execution->getVariable('execution_id');
-
         if (isset($_FILES['episodefile']))
         {
-            $upload_dir = wp_upload_dir();
-            $target_path = $upload_dir['path'] . '/' . $_FILES['episodefile']['name'];
-            $target_url = $upload_dir['url'] . '/' . $_FILES['episodefile']['name'];
+            // TODO: file should be deleted after uploading to auphonic
+            $uploadinfo = Storage::get_temporary_upload_information();
+
+            $filename = $_FILES['episodefile']['name'];
+            $target_path = $uploadinfo['path'] . '/' . $filename;
+            $target_url = $uploadinfo['url'] . '/' . $filename;
+
             move_uploaded_file($_FILES['episodefile']['tmp_name'], $target_path);
 
             $execution->setVariable('episode_temp_path', $target_path);
             $execution->setVariable('episode_temp_url', $target_url);
 
-            echo '<p>Debug: I received a file called <strong>' . $_FILES['episodefile']['name'] . '</strong> and moved it to <strong>' . $target_path . '</strong> and it\'s accessible via <strong>' . $target_url . '</strong></p>';
+            Logger::log('I received a file called <strong>' . $_FILES['episodefile']['name'] . '</strong> and moved it to <strong>' . $target_path . '</strong> and it\'s accessible via <strong>' . $target_url . '</strong>');
             return true;
         }
         else
         {
-            echo '<p>Debug: I received no file.</p>';
+            Logger::log('I received no file.');
             return false;
         }
     }

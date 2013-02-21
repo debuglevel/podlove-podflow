@@ -12,25 +12,22 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
         
     }
 
-    public function execute(\ezcWorkflowExecution $execution)
+    private function add_post($title)
     {
-        $execution_id = $execution->getVariable('execution_id');
-
-        $title = $execution->getVariable('episode_title');
-        $subtitle = $execution->getVariable('episode_subtitle');
-        $summary = $execution->getVariable('episode_summary');
-        $duration = $execution->getVariable('episode_duration');
-        $slug = $execution->getVariable('episode_slug');
-
         $post = array(
             'ID' => NULL,
-            'post_content' => "[podlove-web-player]\n\n[podlove-episode-downloads]", //TODO: insert default podlove template
+            'post_content' => \Podlove\Podcast_Post_Type::$default_post_content, // TODO: might better be replaced by a template
             'post_title' => $title,
             'post_type' => 'podcast',
         );
 
         $post_id = wp_insert_post($post);
-        $episode = \Podlove\Model\Episode::find_or_create_by_post_id($post_id);
+        return get_post($post_id);
+    }
+
+    private function add_episode($post, $subtitle, $summary, $slug, $duration)
+    {
+        $episode = \Podlove\Model\Episode::find_or_create_by_post_id($post->ID);
 
         $episode->subtitle = $subtitle;
         $episode->summary = $summary;
@@ -38,15 +35,33 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
         $episode->slug = $slug;
 
         $episode->save();
+        
+        return $episode;
+    }
 
-
+    private function add_mediafile($episode)
+    {
         $mediafile = \Podlove\Model\MediaFile::find_or_create_by_episode_id_and_episode_asset_id($episode->id,
                         1); // TODO: iterate through all available asset types ;)
         $mediafile->determine_file_size();
         $mediafile->save();
+    }
 
-        wp_publish_post($post_id);
+    public function execute(\ezcWorkflowExecution $execution)
+    {
+        $title = $execution->getVariable('episode_title');
+        $subtitle = $execution->getVariable('episode_subtitle');
+        $summary = $execution->getVariable('episode_summary');
+        $duration = $execution->getVariable('episode_duration');
+        $slug = $execution->getVariable('episode_slug');
 
+        $post = $this->add_post($title);
+        $episode = $this->add_episode($post, $subtitle, $summary, $slug,
+                $duration);
+        $mediafile = $this->add_mediafile($episode);
+
+        wp_publish_post($post->ID);
+        
         return true;
     }
 

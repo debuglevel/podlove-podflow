@@ -2,6 +2,8 @@
 
 namespace Podlove\Modules\Podflow\Actions;
 
+use \Podlove\Modules\Podflow\Lib\Logger;
+
 class Metadata_Input_Receiver_Service_Object implements \ezcWorkflowServiceObject
 {
 
@@ -12,20 +14,22 @@ class Metadata_Input_Receiver_Service_Object implements \ezcWorkflowServiceObjec
 
     public function execute(\ezcWorkflowExecution $execution)
     {
-        $execution_id = $execution->getVariable('execution_id');
-
         if (isset($_REQUEST['metadata']))
         {
-            $execution->setVariable('episode_title', $_REQUEST['title']);
-            $execution->setVariable('episode_subtitle', $_REQUEST['subtitle']);
-            $execution->setVariable('episode_summary', $_REQUEST['summary']);
+            $title = $_REQUEST['title'];
+            $subtitle = $_REQUEST['subtitle'];
+            $summary = $_REQUEST['summary'];
+            
+            $execution->setVariable('episode_title', $title);
+            $execution->setVariable('episode_subtitle', $subtitle);
+            $execution->setVariable('episode_summary', $summary);
 
-            echo '<p>Debug: I received metadata: The episode is called <strong>' . $_REQUEST['title'] . '</strong> and its subtitle is <strong>' . $_REQUEST['subtitle'] . '</strong>. The summary is: <strong>' . $_REQUEST['summary'] . '</strong>';
+            Logger::log('I received metadata: The episode is called <strong>' . $title . '</strong> and its subtitle is <strong>' . $subtitle . '</strong>. The summary is: <strong>' . $summary . '</strong>');
             return true;
         }
         else
         {
-            echo '<p>Debug: I received no metadata.</p>';
+            Logger::log('I received no metadata.');
             return false;
         }
     }

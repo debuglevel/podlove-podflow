@@ -7,9 +7,10 @@ class Auphonic_Workflow_Builder extends Workflow_Builder
 
     public function __construct()
     {
-        $this->name = "Auphonic";
+        $this->name = "Auphonic Workflow";
     }
 
+    // TODO: add missing input nodes
     protected function build_process_steps()
     {
         $this->process_steps['get_execution_id'] = new \ezcWorkflowNodeInput(array(
