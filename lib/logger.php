@@ -7,7 +7,7 @@ class Logger
 
     public function log($msg)
     {
-        echo '<p>Debug: ' . $msg . '</p>';
+        echo '<p style="color: gray; font-size: smaller;">Debug: ' . $msg . '</p>';
     }
 
 }
