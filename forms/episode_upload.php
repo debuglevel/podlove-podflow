@@ -15,6 +15,6 @@
         <input name="episodefile" type="file" />
     </p>
     <p>
-        <input type="submit" value="Okay, let's go!" />
+        <input type="submit" value="Okay, let's go!" class="button-primary" />
     </p>
 </form>

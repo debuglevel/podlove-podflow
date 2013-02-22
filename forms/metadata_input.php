@@ -25,7 +25,7 @@
     </p>
 
     <p>
-        <input type="submit" name="metadata" value="And now, publish this episode!" class="button-primary" />
+        <input type="submit" name="metadata" value="Only step left!" class="button-primary" />
     </p>
 
 </form>
