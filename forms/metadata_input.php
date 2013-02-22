@@ -7,7 +7,7 @@
 
     <p>
         Now, please tell me what's the <strong>title</strong> of this episode:
-        <textarea rows="1" class="large-text" name="title"></textarea>
+        <textarea rows="1" class="large-text" name="title"><?php echo $form_vars['title_guess']; ?></textarea>
     </p>
 
     <p>
