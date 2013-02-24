@@ -62,6 +62,9 @@ class Auphonic_Workflow_Builder extends Workflow_Builder
         
         $this->process_steps['podlove_publish'] = new \ezcWorkflowNodeAction(array(
             'class' => '\Podlove\Modules\Podflow\Actions\Podlove_Publish_Service_Object'));
+        
+        $this->process_steps['done_message'] = new \ezcWorkflowNodeAction(array(
+            'class' => '\Podlove\Modules\Podflow\Actions\Done_Message_Service_Object'));
     }
 
     protected function connect_process_steps()
@@ -98,7 +101,10 @@ class Auphonic_Workflow_Builder extends Workflow_Builder
         //$this -> process_steps['fileserver_move'] -> addInNode($this -> process_steps['auphonic_download']);
         
         $this->process_steps['podlove_publish']->addInNode($this->process_steps['auphonic_download']);
-        $this->workflow->endNode->addInNode($this->process_steps['podlove_publish']);
+        
+        $this->process_steps['done_message']->addInNode($this->process_steps['podlove_publish']);
+        
+        $this->workflow->endNode->addInNode($this->process_steps['done_message']);
     }
 
 }
