@@ -7,7 +7,10 @@ class Logger
 
     public function log($msg)
     {
-        echo '<p style="color: gray; font-size: smaller;">Debug: ' . $msg . '</p>';
+        if (get_option('podflow_logging_enabled', false) == true)
+        {
+            echo '<p style="color: gray; font-size: smaller;">Debug: ' . $msg . '</p>';
+        }
     }
 
 }
