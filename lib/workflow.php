@@ -28,37 +28,6 @@ class Workflow
         return $workflow;
     }
 
-    private function get_workflow_database_execution($execution_id = null)
-    {
-        $dbHandler = Database::get_database_handler();
-
-        $options = new \ezcWorkflowDatabaseOptions;
-        $options->prefix = Database::get_table_prefix();
-
-        return new \ezcWorkflowDatabaseExecution($dbHandler, $execution_id,
-                $options);
-    }
-    
-    public function create_workflow_execution($workflow_name)
-    {
-        $execution = Workflow::get_workflow_database_execution();
-
-        $dbHandler = Database::get_database_handler();
-        Database::setup_tables($dbHandler); //TODO:
-        Workflow::setup_workflows($dbHandler); //TODO: does not logically belong here. should really be moved to a installation hook 
-
-        $execution->workflow = Workflow::get_workflow($workflow_name, $dbHandler);
-
-        return $execution;
-    }
-
-    public function get_workflow_execution($execution_id)
-    {
-        $execution = Workflow::get_workflow_database_execution($execution_id);
-        
-        return $execution;
-    }
-
 }
 
 ?>
