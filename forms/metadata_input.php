@@ -2,7 +2,7 @@
     Thank you for the episode you uploaded!
 </p>
 
-<form action="edit.php?post_type=podcast&page=<?php echo \Podlove\Modules\Podflow\Podflow::menu_slug; ?>" method="POST">
+<form action="edit.php?post_type=podcast&page=<?php echo \Podlove\Modules\Podflow\Podflow::menu_slug_new; ?>" method="POST">
     <input name="execution_id" type="hidden" value="<?php echo $form_vars['execution_id']; ?>" />
 
     <p>

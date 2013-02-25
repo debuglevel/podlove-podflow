@@ -8,7 +8,7 @@ use \Podlove\Modules\Podflow\Lib\Workflow;
 class Workflow
 {
 
-    private function setup_workflows($dbHandler)
+    public function setup_workflows($dbHandler)
     {
         $definitionStorage = new \ezcWorkflowDatabaseDefinitionStorage($dbHandler);
         $definitionStorage->options['prefix'] = Database::get_table_prefix();

@@ -10,7 +10,7 @@ class Workflow_Execution
         return $execution->getVariable('execution_id');
     }
 
-    private function get_workflow_database_execution($execution_id = null)
+    public function get_workflow_database_execution($execution_id = null)
     {
         $dbHandler = Database::get_database_handler();
 
@@ -23,7 +23,7 @@ class Workflow_Execution
 
     public function create_workflow_execution($workflow_name)
     {
-        $execution = Workflow::get_workflow_database_execution();
+        $execution = Workflow_Execution::get_workflow_database_execution();
 
         $dbHandler = Database::get_database_handler();
         Database::setup_tables($dbHandler); //TODO:
@@ -36,7 +36,7 @@ class Workflow_Execution
 
     public function get_workflow_execution($execution_id)
     {
-        $execution = Workflow::get_workflow_database_execution($execution_id);
+        $execution = Workflow_Execution::get_workflow_database_execution($execution_id);
 
         return $execution;
     }
