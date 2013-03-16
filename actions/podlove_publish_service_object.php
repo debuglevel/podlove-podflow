@@ -78,7 +78,16 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
                 $duration);
         $mediafile = $this->add_mediafile($episode);
 
-        wp_publish_post($post->ID);
+        $publish_state = $execution->getVariable('episode_publish_state');
+        if ($publish_state == 'publish')
+        {
+            wp_publish_post($post->ID);
+        }
+        else if (($publish_state == 'draft' or true===true))    //XXX: in the future might be 'scheduled' added. for now just save everything as a draft
+        {
+            
+        }
+        
 
         return true;
     }

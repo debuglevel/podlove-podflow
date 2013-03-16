@@ -20,7 +20,12 @@
     </p>
 
     <p>
-        <input type="submit" name="preset" value="And now, publish this episode!" class="button-primary" />
+
+        <input type="hidden" name="preset" value="preset" />
+        <!-- <input type="submit" name="preset" value=""  />
+        <input type="submit" name="preset" value="" /> -->
+        <button name="publish_state" value="publish" type="submit" class="button-primary">And now, publish this episode!</button>
+        <button name="publish_state" value="draft" type="submit">Just save it as a draft.</button>
     </p>
 
 </form>

@@ -3,6 +3,7 @@
     Okay. We're done!
 </p>
 <p>
+    <!-- TODO: distinguish between publish_status publish and draft -->
     I published your episode. But... as I am still learning how to do this, it might be a good idea that you double-check <a href="<?php echo $form_vars['site_url']; ?>">the blog posting</a>.
 </p>
 <p>
