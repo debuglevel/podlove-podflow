@@ -94,7 +94,7 @@ class Auphonic_Download_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Auphonic_Download_Service_Object";
+        return __CLASS__;
     }
 
 }

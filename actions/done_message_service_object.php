@@ -25,7 +25,7 @@ class Done_Message_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Metadata_Input_Form_Service_Object";
+        return __CLASS__;
     }
 
 }

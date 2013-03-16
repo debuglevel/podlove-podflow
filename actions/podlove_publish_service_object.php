@@ -94,7 +94,7 @@ class Podlove_Publish_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Podlove_Publish_Service_Object";
+        return __CLASS__;
     }
 
 }

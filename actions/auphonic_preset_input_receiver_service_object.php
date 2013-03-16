@@ -35,7 +35,7 @@ class Auphonic_Preset_Input_Receiver_Service_Object implements \ezcWorkflowServi
 
     public function __toString()
     {
-        return "Auphonic_Preset_Input_Receiver_Service_Object";
+        return __CLASS__;
     }
 
 }

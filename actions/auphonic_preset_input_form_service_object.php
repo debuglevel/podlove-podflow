@@ -32,7 +32,7 @@ class Auphonic_Preset_Input_Form_Service_Object implements \ezcWorkflowServiceOb
 
     public function __toString()
     {
-        return "Auphonic_Finish_Check_Service_Object";
+        return __CLASS__;
     }
 
 }

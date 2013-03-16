@@ -36,7 +36,7 @@ class Metadata_Input_Receiver_Service_Object implements \ezcWorkflowServiceObjec
 
     public function __toString()
     {
-        return "Metadata_Input_Receiver_Service_Object";
+        return __CLASS__;
     }
 
 }

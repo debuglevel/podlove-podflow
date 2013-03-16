@@ -27,7 +27,7 @@ class Echo_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Echo_Service_Object, message {$this->message}";
+        return __CLASS__;
     }
 
 }

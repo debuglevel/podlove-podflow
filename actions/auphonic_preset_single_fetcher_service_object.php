@@ -31,7 +31,7 @@ class Auphonic_Preset_Single_Fetcher_Service_Object implements \ezcWorkflowServi
 
     public function __toString()
     {
-        return "Auphonic_Finish_Check_Service_Object";
+        return __CLASS__;
     }
 
 }

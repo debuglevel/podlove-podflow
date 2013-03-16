@@ -29,7 +29,7 @@ class Episode_Upload_Form_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Episode_Upload_Form_Service_Object";
+        return __CLASS__;
     }
 
 }

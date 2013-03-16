@@ -47,7 +47,7 @@ class Auphonic_Production_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Auphonic_Production_Service_Object";
+        return __CLASS__;
     }
 
 }

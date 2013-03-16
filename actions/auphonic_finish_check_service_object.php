@@ -44,7 +44,7 @@ class Auphonic_Finish_Check_Service_Object implements \ezcWorkflowServiceObject
 
     public function __toString()
     {
-        return "Auphonic_Finish_Check_Service_Object";
+        return __CLASS__;
     }
 
 }
